@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Emathdisplaymode - A jquery displaystyle math-tool</title>
+        <meta charset="UTF-8">
+        <link type="text/css" rel="stylesheet" media="all" href="style.css" />
+        <link type="text/css" rel="stylesheet" media="all" href="mathquill/mathquill.css" />
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="mathquill/mathquill.js"></script>
+        <script type="text/javascript" src="mqpanel.js"></script>
+        <script type="text/javascript" src="jquery.emathdisplaymode.js"></script>
+        <script type="text/javascript">
+            jQuery(function(){
+                jQuery('#mathquillpanel').mqpanel();
+                jQuery('#display1').emathdisplaymode({"latex":"2x+4x-8x=-2x", "editable":false});
+                jQuery('#display2').emathdisplaymode({"latex":"2x+4x-8x=-2x", "editable":true})
+                    .bind('addnext', function(event, elemtype, place){
+                        alert(elemtype+': '+place.find('.emdisplaymode-content').mathquill('latex'));
+                    });
+            });
+        </script>
+    </head>
+    <body>
+        <header>
+            <div id="head-content">
+                <img id="logo" src="images/emath-logo.png" alt="E-Math" />
+                <h1>Emathdisplaymode</h1>
+                <h2>Create mathformulas in "displaystyle"</h2>
+            </div>
+        </header>
+        <a href="https://github.com/e-math/emathdisplaymode"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+        <div id="mathquillpanel"></div>
+        <article class="content">
+            <p>This jQuery-plugin is used to show a mathematical formula in LaTeX-like displaystyle in both
+            viewmode and editmode.
+            It depends on <a href="http://jquery.com">jQuery</a> and <a href="http://mathquill.com">MathQuill</a>.
+            Optionally <code>mqpanel.js</code> can also be used.</p>
+            <p>Here are couple of examples, how to use <code>jquery.emathdisplaymode.js</code>.</p>
+            <h2>Non-editable</h2>
+            <p>Using <code>emathdisplaymode</code> to show existing formula</p>
+            <div class="codewrapper">
+<div class="codeexample">
+&lt;form&gt;
+    &lt;div id="display1"&gt;&lt;/div&gt;
+&lt;/form&gt;
+&lt;script type="text/javascript"&gt;
+    jQuery('#display1').emathdisplaymode({"latex":"2x+4x-8x=-2x", "editable":false});
+&lt;/script&gt;
+</div>
+            </div>
+            <div id="display1"></div>
+            
+            <h2>Editable</h2>
+            <p>Using <code>emathdisplaymode</code> to edit a formula</p>
+            <div class="codewrapper">
+<div class="codeexample">
+&lt;form&gt;
+    &lt;div id="display2"&gt;&lt;/div&gt;
+&lt;/form&gt;
+&lt;script type="text/javascript"&gt;
+    jQuery('#display2').emathdisplaymode({"latex":"2x+4x-8x=-2x", "editable":true});
+&lt;/script&gt;
+</div>
+            </div>
+            <div id="display2"></div>
+            
+            <p>Editable displaymode field triggers <code>changed</code>-event when the content changes and
+            <code>addnext</code>-event when enter-key is pressed. The <code>addnext</code>-event will also
+            get extra parameters <code>['emathdisplaymode', place]</code>, where <code>'emathdisplaymode'</code>
+            is the type of this element and <code>place</code> is jQuery-object with the containing DOM-element.</p>
+            <p>These events can be used in the containing system (ebook, Moodle, etc.) to trigger
+            getting the data from <code>emathdisplaymode</code> and saving it or continuing editing with the next element.</p>
+        </article>
+        <footer>
+            <div id="disclaimerbox">
+                <div id="leftlogo">
+                    <img src="images/CB_logo-200.png" alt="" />
+                </div>
+                <div id="rightlogo">
+                    <img src="images/EU_with_references-300.png" alt="" />
+                </div>
+                <div id="disclaimer">
+                    The contents of the website reflect the authors' views. The Managing Authority of the Central Baltic INTERREG IVA Programme cannot be held liable for the information published by the project partners. 
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
